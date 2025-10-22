@@ -17,7 +17,7 @@ export const BubbleMap: React.FC<BubbleMapProps> = ({ data, valueKey, labelKey }
     data.length > 0 ? [data[0].lat, data[0].lng] : [0, 0];
 
   // Compute circle radius: larger values = bigger circles
-  const getRadius = (value: number) => Math.sqrt(value) * 400;
+  const getRadius = (value: number) => Math.sqrt(value) * 500;
 
   const getColor = (value: number) => {
     if (value > 20000) return "rgba(239, 68, 68, 0.6)";

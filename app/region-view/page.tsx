@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Navbar } from "../../src/components/ui/navbar";
 import { Footer } from "../../src/components/ui/footer";
-import { BubbleMap } from "../../src/components/ui/BubbleMap";
 import { fetchMarketingData } from "../../src/lib/api";
 import { MarketingData, Campaign, RegionalPerformance } from "../../src/types/marketing";
 
@@ -12,6 +12,14 @@ interface RegionalPerformanceWithCoords extends RegionalPerformance {
   lat: number;
   lng: number;
 }
+
+const BubbleMap = dynamic(
+  () => import("../../src/components/ui/BubbleMap").then((mod) => mod.BubbleMap),
+  {
+    ssr: false,
+    loading: () => <p className="text-center text-white">Loading map...</p>,
+  }
+);
 
 export default function RegionView() {
   const [marketingData, setMarketingData] = useState<MarketingData | null>(null);
